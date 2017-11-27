@@ -1,4 +1,4 @@
-pragma solidity ^0.4.4;
+pragma solidity ^0.4.11;
 
 contract MultiNumberBettingV1 {
   uint8[] arr;
@@ -14,23 +14,29 @@ contract MultiNumberBettingV1 {
       winnerCount = 0;
     // constructor
   }
-  function guess(uint8 g) returns (bool){
 
-    for(uint8 i = 0; i<arr.length; i++ ){
-      if(g == arr[i]){
+  function guess(uint8 g) returns (bool){
+    for(uint8 i = 0; i < arr.length; i++ ) {
+      if(g == arr[i]) {
         winnerCount = winnerCount + 1;
         return true;
       }
-      loserCount = loserCount +1;
-      return false;
+
     }
+      loserCount = loserCount +1;
+    return false;
   }
 
-  function getWin() returns (uint){
+  function getWin() constant returns (uint) {
     return winnerCount;
   }
 
-  function getLose() returns (uint){
+  function getLose() constant returns (uint) {
     return loserCount;
   }
+
+  function totalGuesses() constant returns (uint) {
+    return loserCount + winnerCount;
+  }
+
 }
